@@ -3,11 +3,11 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [ -x "$HOME/.cc-switch/tools/bailian-media/bailian-media" ]; then
-  exec "$HOME/.cc-switch/tools/bailian-media/bailian-media" "$@"
+if [ -x "$HOME/.cc-switch/tools/bailian-media" ]; then
+  exec "$HOME/.cc-switch/tools/bailian-media" "$@"
 fi
 
-REPO_CLI="$SCRIPT_DIR/../../../tools/bailian-media/bailian-media"
+REPO_CLI="$SCRIPT_DIR/../tools/bailian-media"
 if [ -x "$REPO_CLI" ]; then
   exec "$REPO_CLI" "$@"
 fi

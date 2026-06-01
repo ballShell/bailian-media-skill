@@ -35,7 +35,7 @@ bailian-media text-to-video --models auto
 
 ## 支持的模型家族
 
-当前模型注册表位于 [tools/bailian-media/models.json](tools/bailian-media/models.json)，覆盖：
+当前模型注册表位于 [skill/bailian-media/tools/models.json](skill/bailian-media/tools/models.json)，覆盖：
 
 - Wan：图像生成、图像编辑、文生视频、图生视频、参考生视频、视频编辑
 - Qwen-Image：中文文字渲染、海报、产品图、图像编辑
@@ -49,8 +49,7 @@ bailian-media text-to-video --models auto
 
 ```text
 .
-├── skill/bailian-media/          # Agent Skill 包
-├── tools/bailian-media/          # CLI 与模型注册表
+├── skill/bailian-media/          # Agent Skill 包（含 CLI 与模型注册表）
 ├── scripts/install.sh            # 本地安装脚本
 ├── examples/                     # 示例命令
 └── docs/                         # 补充文档
@@ -81,13 +80,13 @@ export BAILIAN_MEDIA_OUTPUT_ROOT="$HOME/.cc-switch/outputs/bailian-media"
 查看模型：
 
 ```bash
-./tools/bailian-media/bailian-media list-models
+./skill/bailian-media/tools/bailian-media list-models
 ```
 
 使用默认候选模型生成图片：
 
 ```bash
-./tools/bailian-media/bailian-media text-to-image \
+./skill/bailian-media/tools/bailian-media text-to-image \
   --prompt "一张中文科技发布会海报，标题为「灵感发生器」，玻璃质感产品装置" \
   --models auto
 ```
@@ -95,7 +94,7 @@ export BAILIAN_MEDIA_OUTPUT_ROOT="$HOME/.cc-switch/outputs/bailian-media"
 显式指定模型：
 
 ```bash
-./tools/bailian-media/bailian-media text-to-image \
+./skill/bailian-media/tools/bailian-media text-to-image \
   --prompt "极简产品摄影，一只透明玻璃香水瓶，高清细节" \
   --models wan2.7-image-pro qwen-image-2.0-pro z-image-turbo
 ```
@@ -103,7 +102,7 @@ export BAILIAN_MEDIA_OUTPUT_ROOT="$HOME/.cc-switch/outputs/bailian-media"
 图生视频，传入远程首帧图片：
 
 ```bash
-./tools/bailian-media/bailian-media image-to-video \
+./skill/bailian-media/tools/bailian-media image-to-video \
   --prompt "让画面中的人物缓慢转头看向镜头，电影感光影" \
   --media '[{"type":"first_frame","url":"https://example.com/first.png"}]' \
   --models auto
@@ -112,7 +111,7 @@ export BAILIAN_MEDIA_OUTPUT_ROOT="$HOME/.cc-switch/outputs/bailian-media"
 视频编辑：
 
 ```bash
-./tools/bailian-media/bailian-media video-edit \
+./skill/bailian-media/tools/bailian-media video-edit \
   --prompt "把视频改成日落海边风格，保留人物动作" \
   --media '[{"type":"base","url":"https://example.com/input.mp4"}]' \
   --models auto
@@ -199,9 +198,9 @@ text-to-image/20260601-210000/
 ## 开发检查
 
 ```bash
-python3 -m py_compile tools/bailian-media/bailian_media.py
-python3 -m json.tool tools/bailian-media/models.json >/dev/null
-./tools/bailian-media/bailian-media list-models
+python3 -m py_compile skill/bailian-media/tools/bailian_media.py
+python3 -m json.tool skill/bailian-media/tools/models.json >/dev/null
+./skill/bailian-media/tools/bailian-media list-models
 ```
 
 ## English
@@ -223,8 +222,8 @@ It groups comparable models behind capability-based commands. With `--models aut
 
 ```bash
 export DASHSCOPE_API_KEY="your-api-key"
-./tools/bailian-media/bailian-media list-models
-./tools/bailian-media/bailian-media text-to-image \
+./skill/bailian-media/tools/bailian-media list-models
+./skill/bailian-media/tools/bailian-media text-to-image \
   --prompt "A clean product poster with Chinese title text" \
   --models auto
 ```

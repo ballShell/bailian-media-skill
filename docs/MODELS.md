@@ -1,6 +1,6 @@
 # Model Registry
 
-The canonical model registry is `tools/bailian-media/models.json`.
+The canonical model registry is `skill/bailian-media/tools/models.json`.
 
 ## Capability Defaults
 

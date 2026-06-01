@@ -7,10 +7,20 @@ CC_SWITCH_HOME="${CC_SWITCH_HOME:-$HOME/.cc-switch}"
 mkdir -p "$CC_SWITCH_HOME/skills" "$CC_SWITCH_HOME/tools"
 rm -rf "$CC_SWITCH_HOME/skills/bailian-media" "$CC_SWITCH_HOME/tools/bailian-media"
 cp -R "$ROOT_DIR/skill/bailian-media" "$CC_SWITCH_HOME/skills/bailian-media"
-cp -R "$ROOT_DIR/tools/bailian-media" "$CC_SWITCH_HOME/tools/bailian-media"
-chmod +x "$CC_SWITCH_HOME/tools/bailian-media/bailian-media" \
-  "$CC_SWITCH_HOME/tools/bailian-media/bailian_media.py" \
+chmod +x "$CC_SWITCH_HOME/skills/bailian-media/tools/bailian-media" \
+  "$CC_SWITCH_HOME/skills/bailian-media/tools/bailian_media.py" \
   "$CC_SWITCH_HOME/skills/bailian-media/scripts/bailian-media"
+
+# Generate a PATH-friendly CLI wrapper that does not rely on $0 location.
+# This avoids symlink + $(dirname $0) issues when the wrapper is invoked via
+# ~/.local/bin/bailian-media or other symlinked locations.
+CLI_PY="$CC_SWITCH_HOME/skills/bailian-media/tools/bailian_media.py"
+cat > "$CC_SWITCH_HOME/tools/bailian-media" <<EOF
+#!/usr/bin/env bash
+set -euo pipefail
+exec python3 "$CLI_PY" "\$@"
+EOF
+chmod +x "$CC_SWITCH_HOME/tools/bailian-media"
 
 install_link() {
   local link_path="$1"
@@ -28,6 +38,6 @@ install_link "$HOME/.config/opencode/skills/bailian-media" "$CC_SWITCH_HOME/skil
 install_link "$HOME/.config/opencode/tools/bailian-media" "$CC_SWITCH_HOME/tools/bailian-media"
 
 mkdir -p "$HOME/.local/bin"
-install_link "$HOME/.local/bin/bailian-media" "$CC_SWITCH_HOME/tools/bailian-media/bailian-media"
+install_link "$HOME/.local/bin/bailian-media" "$CC_SWITCH_HOME/tools/bailian-media"
 
 echo "Installed bailian-media skill and CLI under $CC_SWITCH_HOME"
