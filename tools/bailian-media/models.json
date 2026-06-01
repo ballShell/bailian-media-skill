@@ -1,0 +1,158 @@
+{
+  "defaults": {
+    "base_url": "https://dashscope.aliyuncs.com/api/v1",
+    "output_root": "~/.cc-switch/outputs/bailian-media",
+    "poll_interval_sec": 5,
+    "timeout_sec": 900
+  },
+  "capability_defaults": {
+    "text_to_image": ["wan2.7-image-pro", "qwen-image-2.0-pro", "z-image-turbo"],
+    "image_edit": ["wan2.7-image-pro", "qwen-image-2.0-pro"],
+    "text_to_video": ["wan2.7-t2v", "happyhorse-1.0-t2v", "kling/kling-v3-video-generation"],
+    "image_to_video": ["wan2.7-i2v", "happyhorse-1.0-i2v", "kling/kling-v3-video-generation"],
+    "reference_to_video": ["wan2.7-r2v", "happyhorse-1.0-r2v", "kling/kling-v3-omni-video-generation"],
+    "video_edit": ["wan2.7-videoedit", "happyhorse-1.0-video-edit", "kling/kling-v3-omni-video-generation"]
+  },
+  "models": {
+    "wan2.7-image-pro": {
+      "family": "wan",
+      "capabilities": ["text_to_image", "image_edit"],
+      "endpoint": "/services/aigc/image-generation/generation",
+      "request_style": "messages",
+      "async_only": true,
+      "default_parameters": {"size": "2K", "n": 1, "watermark": false, "thinking_mode": true}
+    },
+    "wan2.7-image": {
+      "family": "wan",
+      "capabilities": ["text_to_image", "image_edit"],
+      "endpoint": "/services/aigc/image-generation/generation",
+      "request_style": "messages",
+      "async_only": true,
+      "default_parameters": {"size": "2K", "n": 1, "watermark": false}
+    },
+    "qwen-image-2.0-pro": {
+      "family": "qwen-image",
+      "capabilities": ["text_to_image", "image_edit"],
+      "endpoint": "/services/aigc/multimodal-generation/generation",
+      "request_style": "messages",
+      "async_only": false,
+      "default_parameters": {"size": "2048*2048", "n": 1, "watermark": false, "prompt_extend": true}
+    },
+    "qwen-image-2.0": {
+      "family": "qwen-image",
+      "capabilities": ["text_to_image", "image_edit"],
+      "endpoint": "/services/aigc/multimodal-generation/generation",
+      "request_style": "messages",
+      "async_only": false,
+      "default_parameters": {"size": "2048*2048", "n": 1, "watermark": false, "prompt_extend": true}
+    },
+    "z-image-turbo": {
+      "family": "z-image",
+      "capabilities": ["text_to_image"],
+      "endpoint": "/services/aigc/multimodal-generation/generation",
+      "request_style": "messages",
+      "async_only": false,
+      "default_parameters": {"size": "1024*1024", "prompt_extend": false}
+    },
+    "wan2.7-t2v": {
+      "family": "wan",
+      "capabilities": ["text_to_video"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "default_parameters": {"resolution": "720P", "duration": 5, "watermark": false, "prompt_extend": true}
+    },
+    "wan2.7-i2v": {
+      "family": "wan",
+      "capabilities": ["image_to_video"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "default_parameters": {"resolution": "720P", "duration": 5, "watermark": false}
+    },
+    "wan2.7-r2v": {
+      "family": "wan",
+      "capabilities": ["reference_to_video"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "default_parameters": {"resolution": "720P", "duration": 5, "watermark": false}
+    },
+    "wan2.7-videoedit": {
+      "family": "wan",
+      "capabilities": ["video_edit"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "default_parameters": {"resolution": "720P", "duration": 5, "watermark": false}
+    },
+    "happyhorse-1.0-t2v": {
+      "family": "happyhorse",
+      "capabilities": ["text_to_video"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "default_parameters": {"resolution": "720P", "duration": 5, "watermark": false}
+    },
+    "happyhorse-1.0-i2v": {
+      "family": "happyhorse",
+      "capabilities": ["image_to_video"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "default_parameters": {"resolution": "720P", "duration": 5, "watermark": false}
+    },
+    "happyhorse-1.0-r2v": {
+      "family": "happyhorse",
+      "capabilities": ["reference_to_video"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "default_parameters": {"resolution": "720P", "duration": 5, "watermark": false}
+    },
+    "happyhorse-1.0-video-edit": {
+      "family": "happyhorse",
+      "capabilities": ["video_edit"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "default_parameters": {"resolution": "720P", "duration": 5, "watermark": false}
+    },
+    "kling/kling-v3-image-generation": {
+      "family": "kling",
+      "capabilities": ["text_to_image", "image_edit"],
+      "endpoint": "/services/aigc/image-generation/generation",
+      "request_style": "messages",
+      "async_only": true,
+      "region_note": "China mainland Beijing region only; requires Kling AI enablement.",
+      "default_parameters": {"n": 1, "aspect_ratio": "1:1", "resolution": "1k"}
+    },
+    "kling/kling-v3-omni-image-generation": {
+      "family": "kling",
+      "capabilities": ["text_to_image", "image_edit"],
+      "endpoint": "/services/aigc/image-generation/generation",
+      "request_style": "messages",
+      "async_only": true,
+      "region_note": "China mainland Beijing region only; requires Kling AI enablement.",
+      "default_parameters": {"n": 1, "aspect_ratio": "1:1", "resolution": "1k"}
+    },
+    "kling/kling-v3-video-generation": {
+      "family": "kling",
+      "capabilities": ["text_to_video", "image_to_video"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "region_note": "China mainland Beijing region only; requires Kling AI enablement.",
+      "default_parameters": {"mode": "std", "duration": 5, "audio": false, "watermark": true}
+    },
+    "kling/kling-v3-omni-video-generation": {
+      "family": "kling",
+      "capabilities": ["text_to_video", "image_to_video", "reference_to_video", "video_edit"],
+      "endpoint": "/services/aigc/video-generation/video-synthesis",
+      "request_style": "video",
+      "async_only": true,
+      "region_note": "China mainland Beijing region only; requires Kling AI enablement.",
+      "default_parameters": {"mode": "std", "duration": 5, "audio": false, "watermark": true}
+    }
+  }
+}
